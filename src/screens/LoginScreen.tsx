@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { View, Text, Button, StyleSheet, Alert } from "react-native";
 import { login } from "../services/movielensApiService";
 import { useNavigation } from "@react-navigation/native";
+import { UsernameInput } from "../components/actions/UsernameInput";
+import { PasswordInput } from "../components/actions/PaswordInput";
 
 export const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -22,22 +24,8 @@ export const LoginScreen: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        autoFocus
-        onChangeText={setUsername}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-
+      <UsernameInput username={username} setUsername={setUsername} />
+      <PasswordInput password={password} setPassword={setPassword} />
       <Button title="Submit" onPress={loginHandler} />
     </View>
   );
