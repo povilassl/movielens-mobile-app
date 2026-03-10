@@ -1,6 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack/";
-import { Movie } from "./src/interfaces/FronPageInterfaces";
+import { Movie } from "./src/interfaces/FrontPageInterfaces";
 
 export type RootStackParamList = {
   Home: undefined;

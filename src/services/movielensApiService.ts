@@ -1,12 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FrontPageData } from "../interfaces/FronPageInterfaces";
+import { FrontPageData } from "../interfaces/FrontPageInterfaces";
 
 export const validateToken = async (): Promise<boolean> => {
   try {
     const cookie = await AsyncStorage.getItem("sessionCookie");
 
     if (cookie) {
-      const expiresMatch = cookie.match(/Expires=([A-Za-z,0-9\-\s\:]+)/);
+      const expiresMatch = cookie.match(/Expires=([A-Za-z,0-9\-\s:]+)/);
 
       if (expiresMatch && expiresMatch[1]) {
         const expiresDateString = expiresMatch[1];
@@ -32,7 +32,7 @@ export const validateToken = async (): Promise<boolean> => {
 
 export const login = async (
   username: string,
-  password: string
+  password: string,
 ): Promise<boolean> => {
   const url = "https://movielens.org/api/sessions";
 

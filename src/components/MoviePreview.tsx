@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Movie } from "../interfaces/FronPageInterfaces";
+import { Movie } from "../interfaces/FrontPageInterfaces";
 import { getMoviePoster } from "../services/movielensApiService";
 
 type Props = {

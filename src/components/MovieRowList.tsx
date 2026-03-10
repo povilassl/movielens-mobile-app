@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { getFrontPage } from "../services/movielensApiService";
-import { FrontPageData } from "../interfaces/FronPageInterfaces";
+import { FrontPageData } from "../interfaces/FrontPageInterfaces";
 import { MovieRow } from "./MovieRow";
 
 export const MovieRowList = () => {
