@@ -1,5 +1,5 @@
 import { useRoute } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import {
   Text,
@@ -47,7 +47,7 @@ export const MovieScreen: React.FC = () => {
           onPress={() => openLink(getImdbReference(movie.imdbMovieId))}
           style={styles.icon}
         >
-          <Icon name="imdb" size={40} color="#f5c518" />
+          <FontAwesome name="imdb" size={40} color="#f5c518" />
         </TouchableOpacity>
 
         {/* YouTube Icon */}
@@ -58,7 +58,7 @@ export const MovieScreen: React.FC = () => {
             }
             style={styles.icon}
           >
-            <Icon name="youtube-play" size={40} color="#FF0000" />
+            <FontAwesome name="youtube-play" size={40} color="#FF0000" />
           </TouchableOpacity>
         )}
       </View>

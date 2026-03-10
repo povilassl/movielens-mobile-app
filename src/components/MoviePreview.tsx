@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Movie } from "../interfaces/FrontPageInterfaces";
 import { getMoviePoster } from "../services/movielensApiService";
+import { ScreenNavigationProp } from "../../types";
 
 type Props = {
   rating: number;
@@ -12,17 +13,28 @@ type Props = {
 };
 
 export const MoviePreview: React.FC<Props> = ({ rating, movie }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<ScreenNavigationProp>();
+  const [hasImageError, setHasImageError] = useState(false);
+
+  const posterUrl = movie.posterPath ? getMoviePoster(movie.posterPath) : "";
+  const shouldShowPoster = Boolean(posterUrl) && !hasImageError;
 
   return (
     <TouchableOpacity
       style={styles.movieCard}
       onPress={() => navigation.navigate("MovieScreen", { movie: movie })}
     >
-      <Image
-        source={{ uri: getMoviePoster(movie.posterPath) }}
-        style={styles.movieImage}
-      />
+      {shouldShowPoster ? (
+        <Image
+          source={{ uri: posterUrl }}
+          style={styles.movieImage}
+          onError={() => setHasImageError(true)}
+        />
+      ) : (
+        <View style={styles.posterFallback}>
+          <Text style={styles.posterFallbackText}>No poster</Text>
+        </View>
+      )}
       <Text style={styles.movieTitle}>{movie.title}</Text>
       {rating !== 0 && (
         <View style={styles.ratingContainer}>
@@ -45,6 +57,21 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 8,
     marginBottom: 5,
+  },
+  posterFallback: {
+    width: 100,
+    height: 150,
+    borderRadius: 8,
+    marginBottom: 5,
+    backgroundColor: "#e0e0e0",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 6,
+  },
+  posterFallbackText: {
+    fontSize: 12,
+    textAlign: "center",
+    color: "#555",
   },
   movieTitle: {
     fontSize: 14,

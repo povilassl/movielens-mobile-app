@@ -3,11 +3,29 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack/"
 import { Movie } from "./src/interfaces/FrontPageInterfaces";
 
 export type RootStackParamList = {
-  Home: undefined;
-  Movie: { movie: Movie };
+  LoginScreen: undefined;
+  MainTabs: undefined;
+};
+
+export type HomeStackParamList = {
+  HomeScreen: undefined;
+  MovieScreen: { movie: Movie };
+};
+
+export type RootTabParamList = {
+  HomeTab: undefined;
+  ProfileTab: undefined;
 };
 
 export type ScreenNavigationProp =
+  NativeStackNavigationProp<HomeStackParamList>;
+
+export type LoginScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "LoginScreen"
+>;
+
+export type RootStackNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
 
-export type MovieScreenRouteProp = RouteProp<RootStackParamList, "Movie">;
+export type MovieScreenRouteProp = RouteProp<HomeStackParamList, "MovieScreen">;

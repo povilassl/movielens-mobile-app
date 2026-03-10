@@ -67,6 +67,15 @@ export const login = async (
   }
 };
 
+export const logout = async (): Promise<void> => {
+  try {
+    await AsyncStorage.removeItem("sessionCookie");
+    console.log("Set the session cookie");
+  } catch (error) {
+    console.error("Error trying to logout:", error);
+  }
+};
+
 const getSessionCookie = async () => {
   try {
     return await AsyncStorage.getItem("sessionCookie");
@@ -76,7 +85,7 @@ const getSessionCookie = async () => {
   }
 };
 
-export const getFrontPage = async () => {
+export const getFrontPageData = async () => {
   const url = "https://movielens.org/api/users/me/frontpage";
   const cookie = await getSessionCookie();
 

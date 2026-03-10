@@ -1,38 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { getFrontPage } from "../services/movielensApiService";
+import React from "react";
 import { FrontPageData } from "../interfaces/FrontPageInterfaces";
 import { MovieRow } from "./MovieRow";
 
-export const MovieRowList = () => {
-  const [frontPageData, setFrontPageData] = useState<FrontPageData>();
+type Props = {
+  frontPageData?: FrontPageData;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getFrontPage();
-      setFrontPageData(data);
-      console.log("data: " + frontPageData);
-    };
-
-    fetchData();
-  }, []);
+export const MovieRowList: React.FC<Props> = ({ frontPageData }) => {
+  const nonEmptySections =
+    frontPageData?.listOfSearchResults.filter(
+      (section) => section.searchResults.length > 0,
+    ) ?? [];
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {frontPageData?.listOfSearchResults.map((section) => (
+    <>
+      {nonEmptySections.map((section) => (
         <MovieRow
           key={section.title}
           title={section.title}
           searchResults={section.searchResults}
         />
       ))}
-    </ScrollView>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 10,
-  },
-});

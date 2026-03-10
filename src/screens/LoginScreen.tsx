@@ -4,17 +4,18 @@ import { login } from "../services/movielensApiService";
 import { useNavigation } from "@react-navigation/native";
 import { UsernameInput } from "../components/actions/UsernameInput";
 import { PasswordInput } from "../components/actions/PaswordInput";
+import { LoginScreenNavigationProp } from "../../types";
 
 export const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
 
   const loginHandler = async () => {
     const isSuccess = await login(username, password);
     if (isSuccess) {
-      navigation.navigate("HomeScreen");
+      navigation.replace("MainTabs");
     } else {
       Alert.alert("Error", "Login failed. Please try again.");
     }
