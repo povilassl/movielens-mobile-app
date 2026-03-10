@@ -14,18 +14,8 @@ export const MovieRow: React.FC<{
         data={searchResults}
         horizontal
         renderItem={({ item }) => {
-          const userPrediction =
-            item.movieUserData?.predictionDetails?.components?.find(
-              (component) => component.type === "USER",
-            )?.pred;
-
-          const fallbackPrediction =
-            item.movieUserData?.predictionDetails?.components?.find(
-              (component) => component.type === "FALLBACK",
-            )?.pred;
-
           const displayRating = Number(
-            (userPrediction ?? fallbackPrediction ?? 0).toFixed(1),
+            item.movieUserData.prediction.toFixed(1),
           );
 
           return <MoviePreview rating={displayRating} movie={item.movie} />;

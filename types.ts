@@ -9,7 +9,7 @@ export type RootStackParamList = {
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  MovieScreen: { movie: Movie };
+  MovieScreen: { movie: Movie; prediction?: number };
 };
 
 export type RootTabParamList = {

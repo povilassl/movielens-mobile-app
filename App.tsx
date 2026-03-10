@@ -25,9 +25,13 @@ const HomeTabStack = () => {
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ title: "Home" }}
+        options={{ title: "MovieLens" }}
       />
-      <HomeStack.Screen name="MovieScreen" component={MovieScreen} />
+      <HomeStack.Screen
+        name="MovieScreen"
+        component={MovieScreen}
+        options={{ title: "" }}
+      />
     </HomeStack.Navigator>
   );
 };

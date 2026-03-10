@@ -22,7 +22,12 @@ export const MoviePreview: React.FC<Props> = ({ rating, movie }) => {
   return (
     <TouchableOpacity
       style={styles.movieCard}
-      onPress={() => navigation.navigate("MovieScreen", { movie: movie })}
+      onPress={() =>
+        navigation.navigate("MovieScreen", {
+          movie: movie,
+          prediction: rating !== 0 ? rating : undefined,
+        })
+      }
     >
       {shouldShowPoster ? (
         <Image
