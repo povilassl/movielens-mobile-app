@@ -16,13 +16,13 @@ Original website: https://movielens.org/
     - [ ] Need links to other pages
     - [ ] Updates to the movie page
         - [ ] Add abiliy to rate a movie
-        - [ ] Genres (horizontal scroll list)
-        - [ ] Change release date to year
-        - [ ] Rating
-        - [ ] Fix length
+        - [x] Genres (horizontal scroll list)
+        - [x] Change release date to year
+        - [x] Rating
+        - [x] Fix length
         - [ ] Add to list dropdown
-        - [ ] Title in original language
+        - [x] Title in original language
         - [ ] Similar movies
         - [ ] Images?
-        - [ ] When there is only one language, show "Language" instead of "Languages"
+        - [x] When there is only one language, show "Language" instead of "Languages"
     - [ ] Fix errors
