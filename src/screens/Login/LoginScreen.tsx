@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Alert } from "react-native";
-import { login } from "../services/movielensApiService";
+import { login } from "../../services/movielensApiService";
 import { useNavigation } from "@react-navigation/native";
-import { UsernameInput } from "../components/actions/UsernameInput";
-import { PasswordInput } from "../components/actions/PaswordInput";
-import { LoginScreenNavigationProp } from "../../types";
+import { UsernameInput } from "./components/UsernameInput";
+import { PasswordInput } from "./components/PaswordInput";
+import { LoginScreenNavigationProp } from "../../../types";
 
 export const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");

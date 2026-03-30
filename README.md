@@ -15,14 +15,15 @@ Original website: https://movielens.org/
     - [ ] Fix width of posters on main page, try to fit them nicely?
     - [ ] Need links to other pages
     - [ ] Updates to the movie page
-        - [ ] Add abiliy to rate a movie
         - [x] Genres (horizontal scroll list)
         - [x] Change release date to year
         - [x] Rating
         - [x] Fix length
-        - [ ] Add to list dropdown
         - [x] Title in original language
+        - [x] Language/s
+        - [x] Add abiliy to rate a movie
+        - [ ] Add to list dropdown
         - [ ] Similar movies
         - [ ] Images?
-        - [x] When there is only one language, show "Language" instead of "Languages"
     - [ ] Fix errors
+    - [x] Refactor code into components

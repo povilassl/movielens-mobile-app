@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Movie } from "../interfaces/FrontPageInterfaces";
-import { getMoviePoster } from "../services/movielensApiService";
-import { ScreenNavigationProp } from "../../types";
+import { Movie } from "../../../interfaces/FrontPageInterfaces";
+import { getMoviePoster } from "../../../services/movielensApiService";
+import { ScreenNavigationProp } from "../../../../types";
 
 type Props = {
   rating: number;

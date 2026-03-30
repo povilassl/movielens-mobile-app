@@ -6,9 +6,9 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { MovieRowList } from "../components/MovieRowList";
-import { FrontPageData } from "../interfaces/FrontPageInterfaces";
-import { getFrontPageData } from "../services/movielensApiService";
+import { MovieRowList } from "./components/MovieRowList";
+import { FrontPageData } from "../../interfaces/FrontPageInterfaces";
+import { getFrontPageData } from "../../services/movielensApiService";
 
 export const HomeScreen: React.FC = () => {
   const [frontPageData, setFrontPageData] = useState<FrontPageData>();

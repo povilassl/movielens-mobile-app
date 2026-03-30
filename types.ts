@@ -1,4 +1,4 @@
-import { RouteProp } from "@react-navigation/native";
+import { NavigatorScreenParams, RouteProp } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack/";
 import { Movie } from "./src/interfaces/FrontPageInterfaces";
 
@@ -12,13 +12,24 @@ export type HomeStackParamList = {
   MovieScreen: { movie: Movie; prediction?: number };
 };
 
+export type SearchStackParamList = {
+  SearchScreen: undefined;
+  MovieScreen: { movie: Movie; prediction?: number };
+};
+
 export type RootTabParamList = {
-  HomeTab: undefined;
+  HomeTab: NavigatorScreenParams<HomeStackParamList> | undefined;
+  SearchTab: NavigatorScreenParams<SearchStackParamList> | undefined;
   ProfileTab: undefined;
 };
 
 export type ScreenNavigationProp =
   NativeStackNavigationProp<HomeStackParamList>;
+
+export type SearchScreenNavigationProp = NativeStackNavigationProp<
+  SearchStackParamList,
+  "SearchScreen"
+>;
 
 export type LoginScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

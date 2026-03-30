@@ -1,22 +1,25 @@
-import { HomeScreen } from "./src/screens/HomeScreen";
-import { LoginScreen } from "./src/screens/LoginScreen";
+import { HomeScreen } from "./src/screens/Home/HomeScreen";
+import { LoginScreen } from "./src/screens/Login/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
 import { validateToken } from "./src/services/movielensApiService";
 import React from "react";
-import { MovieScreen } from "./src/screens/MovieScreen";
-import { ProfileScreen } from "./src/screens/ProfileScreen";
+import { MovieScreen } from "./src/screens/Movie/MovieScreen";
+import { ProfileScreen } from "./src/screens/Profile/ProfileScreen";
+import { SearchScreen } from "./src/screens/Search/SearchScreen";
 import { FontAwesome } from "@expo/vector-icons";
 import {
   HomeStackParamList,
   RootStackParamList,
+  SearchStackParamList,
   RootTabParamList,
 } from "./types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
+const SearchStack = createNativeStackNavigator<SearchStackParamList>();
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const HomeTabStack = () => {
@@ -36,6 +39,23 @@ const HomeTabStack = () => {
   );
 };
 
+const SearchTabStack = () => {
+  return (
+    <SearchStack.Navigator>
+      <SearchStack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{ title: "Search" }}
+      />
+      <SearchStack.Screen
+        name="MovieScreen"
+        component={MovieScreen}
+        options={{ title: "" }}
+      />
+    </SearchStack.Navigator>
+  );
+};
+
 const MainTabs = () => {
   return (
     <Tab.Navigator>
@@ -47,6 +67,17 @@ const MainTabs = () => {
           headerShown: false,
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
             <FontAwesome name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="SearchTab"
+        component={SearchTabStack}
+        options={{
+          title: "Search",
+          headerShown: false,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <FontAwesome name="search" color={color} size={size} />
           ),
         }}
       />
