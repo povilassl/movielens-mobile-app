@@ -17,7 +17,6 @@ export const HomeScreen: React.FC = () => {
 
   const fetchData = async () => {
     const data = await getFrontPageData();
-    console.log("data: ", data);
     setFrontPageData(data);
   };
 

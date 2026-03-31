@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { validateToken } from "./src/services/movielensApiService";
 import React from "react";
 import { MovieScreen } from "./src/screens/Movie/MovieScreen";
@@ -114,8 +115,11 @@ export default function App() {
   }, []);
 
   if (isAuthenticated === null) {
-    //Can show loading indicator here
-    return null;
+    return (
+      <View style={styles.loadingScreen}>
+        <Text style={styles.loadingTitle}>MovieLens</Text>
+      </View>
+    );
   }
 
   return (
@@ -123,7 +127,7 @@ export default function App() {
       <Stack.Navigator
         initialRouteName={isAuthenticated ? "MainTabs" : "LoginScreen"}
       >
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen
           name="MainTabs"
           component={MainTabs}
@@ -133,3 +137,18 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  loadingScreen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+  },
+  loadingTitle: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#111827",
+    letterSpacing: 0.4,
+  },
+});

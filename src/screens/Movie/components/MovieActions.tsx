@@ -1,24 +1,38 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import {
+  getImdbReference,
+  getYoutubeReference,
+} from "../../../services/movielensApiService";
 
 type MovieActionsProps = {
   predictionText: string;
   submittedRating: number | null;
-  hasYoutubeTrailer: boolean;
+  imdbMovieId: string;
+  youtubeTrailerId?: string;
   onRatePress: () => void;
-  onOpenImdb: () => void;
-  onOpenYoutube: () => void;
 };
 
 export const MovieActions: React.FC<MovieActionsProps> = ({
   predictionText,
   submittedRating,
-  hasYoutubeTrailer,
+  imdbMovieId,
+  youtubeTrailerId,
   onRatePress,
-  onOpenImdb,
-  onOpenYoutube,
 }) => {
+  const openLink = (url: string) => {
+    Linking.openURL(url).catch((err) =>
+      console.error("Failed to open URL:", err),
+    );
+  };
+
   return (
     <View style={styles.actionsSection}>
       <View style={[styles.actionPill, styles.predictionPill]}>
@@ -34,14 +48,14 @@ export const MovieActions: React.FC<MovieActionsProps> = ({
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={onOpenImdb}
+        onPress={() => openLink(getImdbReference(imdbMovieId))}
         style={[styles.iconPill, styles.imdbPill]}
       >
         <FontAwesome name="imdb" size={24} color="#f5c518" />
       </TouchableOpacity>
-      {hasYoutubeTrailer && (
+      {youtubeTrailerId && (
         <TouchableOpacity
-          onPress={onOpenYoutube}
+          onPress={() => openLink(getYoutubeReference(youtubeTrailerId))}
           style={[styles.iconPill, styles.youtubePill]}
         >
           <FontAwesome name="youtube-play" size={24} color="#dc2626" />

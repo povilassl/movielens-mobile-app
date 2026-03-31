@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Alert, StyleSheet, ScrollView, Linking } from "react-native";
+import { Alert, StyleSheet, ScrollView } from "react-native";
 import { MovieScreenRouteProp } from "../../../types";
 import { MovieActions } from "./components/MovieActions";
 import { MovieDetailsSection } from "./components/MovieDetailsSection";
@@ -10,10 +10,8 @@ import { MovieRatingModal } from "./components/MovieRatingModal";
 import { MovieSummary } from "./components/MovieSummary";
 import {
   deleteMovieRating,
-  getImdbReference,
   getMoviePoster,
   rateMovie,
-  getYoutubeReference,
 } from "../../services/movielensApiService";
 
 export const MovieScreen: React.FC = () => {
@@ -26,12 +24,6 @@ export const MovieScreen: React.FC = () => {
   const releaseYear = movie.releaseYear || movie.releaseDate?.slice(0, 4);
   const predictionText =
     typeof prediction === "number" ? prediction.toFixed(1) : "N/A";
-
-  const openLink = (url: string) => {
-    Linking.openURL(url).catch((err) =>
-      console.error("Failed to open URL:", err),
-    );
-  };
 
   const openRateDialog = () => {
     setSelectedRating(submittedRating);
@@ -102,12 +94,9 @@ export const MovieScreen: React.FC = () => {
       <MovieActions
         predictionText={predictionText}
         submittedRating={submittedRating}
-        hasYoutubeTrailer={movie.youtubeTrailerIds.length > 0}
+        imdbMovieId={movie.imdbMovieId}
+        youtubeTrailerId={movie.youtubeTrailerIds[0]}
         onRatePress={openRateDialog}
-        onOpenImdb={() => openLink(getImdbReference(movie.imdbMovieId))}
-        onOpenYoutube={() =>
-          openLink(getYoutubeReference(movie.youtubeTrailerIds[0]))
-        }
       />
       <MovieDetailsSection
         languages={movie.languages}

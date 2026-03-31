@@ -58,8 +58,6 @@ const apiRequest = async <T = unknown>(
       ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
     });
 
-    console.log(response);
-
     const sessionCookie = response.headers.get("set-cookie");
     if (sessionCookie) {
       await AsyncStorage.setItem(SESSION_COOKIE_KEY, sessionCookie);
@@ -135,7 +133,6 @@ export const login = async (
 export const logout = async (): Promise<void> => {
   try {
     await AsyncStorage.removeItem(SESSION_COOKIE_KEY);
-    console.log("Set the session cookie");
   } catch (error) {
     console.error("Error trying to logout:", error);
   }
