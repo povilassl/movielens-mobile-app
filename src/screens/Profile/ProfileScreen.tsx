@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { LogoutButton } from "./LogoutButton";
+import { LogoutButton } from "./components/LogoutButton";
 
 export const ProfileScreen: React.FC = () => {
   return (

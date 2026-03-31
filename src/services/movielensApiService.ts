@@ -3,6 +3,7 @@ import {
   FrontPageData,
   Movie,
   MovieUserData,
+  SearchResult,
 } from "../interfaces/FrontPageInterfaces";
 
 const API_BASE_URL = "https://movielens.org/api";
@@ -56,6 +57,8 @@ const apiRequest = async <T = unknown>(
       headers: buildJsonHeaders(cleanCookie),
       ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
     });
+
+    console.log(response);
 
     const sessionCookie = response.headers.get("set-cookie");
     if (sessionCookie) {
@@ -158,9 +161,23 @@ type RateMoviePayload = {
   previousRating?: number | null;
 };
 
-type OmniSearchMovie = {
+export type OmniSearchMovie = {
   movieId: number;
   label: string;
+};
+
+export type OmniSearchPerson = {
+  name: string;
+};
+
+export type OmniSearchTag = {
+  tag: string;
+};
+
+export type OmniSearchResult = {
+  movies: OmniSearchMovie[];
+  people: OmniSearchPerson[];
+  tags: OmniSearchTag[];
 };
 
 type OmniSearchResponse = {
@@ -170,6 +187,19 @@ type OmniSearchResponse = {
       payload: OmniSearchMovie[];
       hasMoreResults: boolean;
     };
+    peopleViewModel: {
+      payload: OmniSearchPerson[];
+    };
+    tunerViewModel: {
+      payload: OmniSearchTag[];
+    };
+  };
+};
+
+type ExploreResponse = {
+  status: string;
+  data: {
+    searchResults: SearchResult[];
   };
 };
 
@@ -190,11 +220,12 @@ type MovieDetailsResult = {
 
 export const searchMovies = async (
   query: string,
-): Promise<OmniSearchMovie[]> => {
+): Promise<OmniSearchResult> => {
+  const empty: OmniSearchResult = { movies: [], people: [], tags: [] };
   const trimmedQuery = query.trim();
 
   if (!trimmedQuery) {
-    return [];
+    return empty;
   }
 
   const response = await apiRequest<OmniSearchResponse>(
@@ -203,10 +234,45 @@ export const searchMovies = async (
 
   if (!response.ok || !response.data) {
     console.error("Failed to search movies", response.status);
+    return empty;
+  }
+
+  const { movieViewModel, peopleViewModel, tunerViewModel } =
+    response.data.data;
+
+  return {
+    movies: movieViewModel?.payload ?? [],
+    people: peopleViewModel?.payload ?? [],
+    tags: tunerViewModel?.payload ?? [],
+  };
+};
+
+export const exploreByTag = async (tag: string): Promise<SearchResult[]> => {
+  const response = await apiRequest<ExploreResponse>(
+    `/movies/explore?tag=${encodeURIComponent(tag)}&sortBy=tagScore`,
+  );
+
+  if (!response.ok || !response.data) {
+    console.error("Failed to explore by tag", response.status);
     return [];
   }
 
-  return response.data.data.movieViewModel.payload ?? [];
+  return response.data.data.searchResults ?? [];
+};
+
+export const exploreByPeople = async (
+  person: string,
+): Promise<SearchResult[]> => {
+  const response = await apiRequest<ExploreResponse>(
+    `/movies/explore?people=${encodeURIComponent(person.toLowerCase())}&sortBy=prediction`,
+  );
+
+  if (!response.ok || !response.data) {
+    console.error("Failed to explore by person", response.status);
+    return [];
+  }
+
+  return response.data.data.searchResults ?? [];
 };
 
 export const getMovieDetailsById = async (

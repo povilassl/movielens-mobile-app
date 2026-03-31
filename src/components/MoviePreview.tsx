@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Movie } from "../../../interfaces/FrontPageInterfaces";
-import { getMoviePoster } from "../../../services/movielensApiService";
-import { ScreenNavigationProp } from "../../../../types";
+import { Movie } from "../interfaces/FrontPageInterfaces";
+import { getMoviePoster } from "../services/movielensApiService";
+import { ScreenNavigationProp } from "../../types";
 
 type Props = {
   rating: number;
@@ -53,19 +53,19 @@ export const MoviePreview: React.FC<Props> = ({ rating, movie }) => {
 
 const styles = StyleSheet.create({
   movieCard: {
-    width: 120,
-    marginRight: 10,
+    width: "100%",
+    maxWidth: 120,
     alignItems: "center",
   },
   movieImage: {
-    width: 100,
-    height: 150,
+    width: "100%",
+    aspectRatio: 2 / 3,
     borderRadius: 8,
     marginBottom: 5,
   },
   posterFallback: {
-    width: 100,
-    height: 150,
+    width: "100%",
+    aspectRatio: 2 / 3,
     borderRadius: 8,
     marginBottom: 5,
     backgroundColor: "#e0e0e0",

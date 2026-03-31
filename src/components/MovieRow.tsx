@@ -13,12 +13,18 @@ export const MovieRow: React.FC<{
       <FlatList
         data={searchResults}
         horizontal
+        contentContainerStyle={styles.rowContent}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => {
           const displayRating = Number(
             item.movieUserData.prediction.toFixed(1),
           );
 
-          return <MoviePreview rating={displayRating} movie={item.movie} />;
+          return (
+            <View style={styles.movieCell}>
+              <MoviePreview rating={displayRating} movie={item.movie} />
+            </View>
+          );
         }}
         keyExtractor={(item) => item.movieId.toString()}
       />
@@ -34,5 +40,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  rowContent: {
+    paddingRight: 10,
+  },
+  separator: {
+    width: 10,
+  },
+  movieCell: {
+    width: 120,
   },
 });

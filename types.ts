@@ -14,6 +14,7 @@ export type HomeStackParamList = {
 
 export type SearchStackParamList = {
   SearchScreen: undefined;
+  ExploreScreen: { title: string; type: "tag" | "people"; query: string };
   MovieScreen: { movie: Movie; prediction?: number };
 };
 

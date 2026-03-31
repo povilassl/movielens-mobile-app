@@ -1,5 +1,5 @@
 import React from "react";
-import { FrontPageData } from "../../../interfaces/FrontPageInterfaces";
+import { FrontPageData } from "../interfaces/FrontPageInterfaces";
 import { MovieRow } from "./MovieRow";
 
 type Props = {

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { MovieRowList } from "./components/MovieRowList";
+import { MovieRowList } from "../../components/MovieRowList";
 import { FrontPageData } from "../../interfaces/FrontPageInterfaces";
 import { getFrontPageData } from "../../services/movielensApiService";
 

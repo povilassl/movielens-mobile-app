@@ -9,6 +9,7 @@ import React from "react";
 import { MovieScreen } from "./src/screens/Movie/MovieScreen";
 import { ProfileScreen } from "./src/screens/Profile/ProfileScreen";
 import { SearchScreen } from "./src/screens/Search/SearchScreen";
+import { ExploreScreen } from "./src/screens/Explore/ExploreScreen";
 import { FontAwesome } from "@expo/vector-icons";
 import {
   HomeStackParamList,
@@ -46,6 +47,11 @@ const SearchTabStack = () => {
         name="SearchScreen"
         component={SearchScreen}
         options={{ title: "Search" }}
+      />
+      <SearchStack.Screen
+        name="ExploreScreen"
+        component={ExploreScreen}
+        options={({ route }) => ({ title: route.params.title })}
       />
       <SearchStack.Screen
         name="MovieScreen"

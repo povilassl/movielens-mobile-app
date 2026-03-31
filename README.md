@@ -27,3 +27,7 @@ Original website: https://movielens.org/
         - [ ] Images?
     - [ ] Fix errors
     - [x] Refactor code into components
+
+## Running the app
+
+> npx expo start
